@@ -3,50 +3,68 @@
     <div class="myForm">
     <el-form ref="form" :model="form" label-width="80px">
   <el-form-item label="专业名称">
-    <el-input v-model="form.name"></el-input>
+    <el-input v-model="form.name" @change="changes"></el-input>
   </el-form-item>
   <el-form-item label="班号">
-    <el-input v-model="form.name"></el-input>
+    <el-input v-model="form.nunber"></el-input>
   </el-form-item>
   <el-form-item label="宿舍区">
-    <el-input v-model="form.name"></el-input>
+    <el-input v-model="form.room"></el-input>
   </el-form-item>
   <el-form-item label="入学日期">
     <div class="block">
-    <el-date-picker
-        v-model="value1"
-        type="date"
-        placeholder="选择日期">
-    </el-date-picker>
+      <el-date-picker
+          type="date"
+          v-model="form.date"
+          placeholder="选择日期">
+      </el-date-picker>
     </div>
   </el-form-item>
     <el-form-item>
-        <el-button type="primary" @click="onSubmit">立即创建</el-button>
-        <el-button>取消</el-button>
+        <el-button type="primary" @click="onSubmit">提交修改</el-button>
+        <el-button>清空</el-button>
     </el-form-item>
 </el-form>
 </div>
 </div>
 </template>
 <script>
+  import qs from 'qs'
   export default {
     data() {
       return {
         form: {
           name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+          room:'',
+          number:'',
+          date:''
         }
       }
     },
     methods: {
       onSubmit() {
-        console.log('submit!');
+        console.log(this.form)
+        var config = {
+          // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          method: 'post'
+        };
+        this.$axios.post('/api',qs.stringify(this.form),config)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((response) => {
+          console.log('response')
+        })
+        // this.$axios.get('/api',{params:this.form},config)
+        // .then((response) => {
+        //   console.log(response)
+        // })
+        // .catch((response) => {
+        //   console.log('response')
+        // })
+      },
+      changes(){
+        
       }
     }
   }

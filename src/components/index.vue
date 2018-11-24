@@ -8,18 +8,30 @@
         text-color="#fff"
         active-text-color="#ffd04b"
         router>
-        <el-menu-item index="statistical">
-            <i class="el-icon-edit-outline"></i>
-            <span slot="title">统计中心</span>
-        </el-menu-item>
-        <el-menu-item index="classesList">
-            <i class="el-icon-warning"></i>
-            <span slot="title">查看班级</span>
-        </el-menu-item>
-        <el-menu-item index="editPlus">
-            <i class="el-icon-setting"></i>
-            <span slot="title">编辑、新建</span>
-        </el-menu-item>
+            <el-menu-item index="statistical">
+                <i class="el-icon-edit-outline"></i>
+                <span slot="title">统计中心</span>
+            </el-menu-item>
+            <el-menu-item index="classesList">
+                <i class="el-icon-warning"></i>
+                <span slot="title">查看班级</span>
+            </el-menu-item>
+            <el-menu-item index="editPlus">
+                <i class="el-icon-setting"></i>
+                <span slot="title">编辑、新建班级</span>
+            </el-menu-item>
+            <el-menu-item index="">
+                <i class="el-icon-setting"></i>
+                <span slot="title">学生信息</span>
+            </el-menu-item>
+            <el-menu-item index="">
+                <i class="el-icon-setting"></i>
+                <span slot="title">学会信息</span>
+            </el-menu-item>
+            <el-menu-item index="">
+                <i class="el-icon-setting"></i>
+                <span slot="title">编辑学会成员</span>
+            </el-menu-item>
         </el-menu>
     </el-col>
     <el-col :span="20">
@@ -48,6 +60,5 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>
