@@ -1,7 +1,7 @@
 <template>
     <div class="header_container">
 		<el-breadcrumb separator="/">
-			<el-breadcrumb-item >系主任后台页面</el-breadcrumb-item>
+			<el-breadcrumb-item >学校后台页面</el-breadcrumb-item>
 		</el-breadcrumb>
 		<el-dropdown trigger="click" menu-align='start'>
 			<div class="avator">

@@ -43,7 +43,6 @@
     },
     methods: {
       onSubmit() {
-        console.log(this.form)
         var config = {
           // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           method: 'post'
