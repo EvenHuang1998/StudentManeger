@@ -15,26 +15,14 @@
           <td>
             宿舍区：丁香11号楼
           </td>
-          <td>人数：11人</td>
+          <td>人数：11人
+            <el-button size="mini">添加</el-button>
+          </td>
           <td>
             入校年份：2016.09.01
           </td>
         </tr>
       </table>
-    </div>
-    <div class="picker">
-      <template>
-        <el-select placeholder="请选择专业">
-          <el-option>
-          </el-option>
-        </el-select>
-      </template>
-      <template>
-        <el-select placeholder="请选择班级">
-          <el-option>
-          </el-option>
-        </el-select>
-      </template>
     </div>
     <template>
             <el-table
@@ -144,6 +132,9 @@ export default {
   }
   .first{
     margin:0 16px 0 70px;
+  }
+  .el-button{
+    margin-left: 20px;
   }
 </style>
 <style>

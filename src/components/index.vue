@@ -2,7 +2,7 @@
 	<div class="manage_page fillcontain">
     <el-col :span="4" style="position:fixed;height: 100vh;background-color:#545c64">
         <el-menu
-        :default-active=index
+        :default-active="index"
         class="el-menu-vertical-demo"
         background-color="#545c64"
         text-color="#fff"
@@ -46,19 +46,25 @@
 
 <script>
 import headerTop from "@/components/headerTop";
+import Bus from '@/assets/other'
 export default {
   data(){
       return{
-        index:'statistical'
+        index:this.$store.state.pageClicked
       }
   },
-  name: 'index',
+  watch: {
+    index(newName, oldName) {
+      console.log(newName,oldName)
+    }
+  } ,
   components: {
       headerTop
   },
   mounted () {
     let arr = window.location.href.toString().split('/')
     this.index = arr[arr.length - 1]
+    this.$store.commit('change',this.index)
   }
 }
 </script>

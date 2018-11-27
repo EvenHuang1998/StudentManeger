@@ -17,18 +17,10 @@
           </td>
           <td>
             人数：50人
+      <el-button class="first1" type="success" round @click="addList" size="mini">新增</el-button>
           </td>
         </tr>
       </table>
-    </div>
-    <div class="picker">
-      <template>
-        <el-select placeholder="请选择协会名">
-          <el-option>
-          </el-option>
-        </el-select>
-      </template>
-      <el-button class="first1" type="success" round @click="addList">新增</el-button>
     </div>
     <template>
             <el-table
@@ -66,7 +58,7 @@
         :visible.sync="centerDialogVisible"
         width="40%"
         center>
-        <el-form :model="form" label-width="80px">
+        <el-form :model="form" label-width="100px">
                 <el-form-item label="学生姓名">
                     <el-input v-model="form.name" :disabled="true"></el-input>
                 </el-form-item>
@@ -78,6 +70,12 @@
                 </el-form-item>
                 <el-form-item label="宿舍区">
                     <el-input v-model="form.room" :disabled="true"></el-input>
+                </el-form-item>
+                <el-form-item label="加入的学会">
+                    <el-tag type="success">Java协会</el-tag>
+                    <el-tag type="success">为之工作室</el-tag>
+                    <el-tag type="success">校科协</el-tag>
+                    <el-tag type="success">校团委</el-tag>
                 </el-form-item>
                 <el-form-item label="入学日期">
                     <div class="block">
@@ -93,7 +91,7 @@
         </el-form>
         <span slot="footer" class="dialog-footer">
             <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
-            <el-button @click="centerDialogVisible = false">取 消</el-button>
+            <el-button @click="centerDialogVisible = false">删 除</el-button>
         </span>
         </el-dialog>
         <el-dialog
@@ -229,7 +227,7 @@ export default {
     margin:0 16px 0 70px;
   }
   .first1{
-    margin:0 10px 0 50px;
+    margin-left:20px;
   }
 </style>
 <style>

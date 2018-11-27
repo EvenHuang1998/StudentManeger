@@ -9,36 +9,11 @@
           </el-option>
         </el-select>
       </template>
-      <el-button class="first" type="primary" round>编辑</el-button>
-      <el-button type="info" round>删除</el-button>
+      <el-button class="first" type="info" round @click="changedelete">{{isDelete?'删除':'取消'}}</el-button>
     </div>
     <div class="cards">
-      <el-card shadow="hover" :body-style="{ padding: '0px' }">
-        <i class="el-icon-error"></i>
-        <img src="../static/1.jpg" class="image" @click="addList"/>
-        <div class="info" @click="addList">java协会</div>
-        <div class="info" @click="addList">1603011</div>
-      </el-card>
-      <el-card shadow="hover" :body-style="{ padding: '0px' }">
-        <i class="el-icon-error"></i>
-        <img src="../static/1.jpg" class="image" @click="addList"/>
-        <div class="info" @click="addList">java协会</div>
-        <div class="info" @click="addList">1603011</div>
-      </el-card>
-      <el-card shadow="hover" :body-style="{ padding: '0px' }">
-        <i class="el-icon-error"></i>
-        <img src="../static/1.jpg" class="image" @click="addList"/>
-        <div class="info" @click="addList">java协会</div>
-        <div class="info" @click="addList">1603011</div>
-      </el-card>
-      <el-card shadow="hover" :body-style="{ padding: '0px' }">
-        <i class="el-icon-error"></i>
-        <img src="../static/1.jpg" class="image" @click="addList"/>
-        <div class="info" @click="addList">java协会</div>
-        <div class="info" @click="addList">1603011</div>
-      </el-card>
-      <el-card shadow="hover" :body-style="{ padding: '0px' }">
-        <i class="el-icon-error"></i>
+      <el-card v-for="item in masterList" :key="item.id" shadow="hover"  v-bind:class="{ active: isEdit }"  :body-style="{ padding: '0px' }">
+        <i class="el-icon-error" v-show="isDelete" @click="ToDelete"></i>
         <img src="../static/1.jpg" class="image" @click="addList"/>
         <div class="info" @click="addList">java协会</div>
         <div class="info" @click="addList">1603011</div>
@@ -48,30 +23,27 @@
       </el-card>
     </div>
     <el-dialog
-        title="编辑学生信息"
+        title="编辑学会信息"
         :visible.sync="centerDialogVisible"
         width="40%"
         center>
         <el-form :model="form" label-width="80px">
-                <el-form-item label="学生姓名">
-                    <el-input v-model="form.name" :disabled="true"></el-input>
+                <el-form-item label="学会号">
+                    <el-input v-model="form.name" :disabled="isEdit"></el-input>
                 </el-form-item>
-                <el-form-item label="所在班级">
-                    <el-input v-model="form.nunber" :disabled="true"></el-input>
+                <el-form-item label="学会名">
+                    <el-input v-model="form.nunber" :disabled="isEdit"></el-input>
                 </el-form-item>
-                <el-form-item label="专业">
-                    <el-input v-model="form.nunber" :disabled="true"></el-input>
+                <el-form-item label="学会地点">
+                    <el-input v-model="form.nunber" :disabled="isEdit"></el-input>
                 </el-form-item>
-                <el-form-item label="宿舍区">
-                    <el-input v-model="form.room" :disabled="true"></el-input>
-                </el-form-item>
-                <el-form-item label="入学日期">
+                <el-form-item label="成立日期">
                     <div class="block">
                     <el-date-picker
                         type="date"
                         v-model="form.date"
                         placeholder="选择日期"
-                         :disabled="true"
+                         :disabled="isEdit"
                         >
                     </el-date-picker>
                     </div>
@@ -89,6 +61,8 @@
 export default {
   data() {
     return {
+        isEdit:false,
+        isDelete:false,
         centerDialogVisible:false,
         form: {
           name: '',
@@ -96,6 +70,32 @@ export default {
           number:'',
           date:''
         },
+        masterList:[
+          {
+            name:'Java协会',
+            num:1603011
+          },
+          {
+            name:'书画社',
+            num:1603012
+          },
+          {
+            name:'科创社',
+            num:1603013
+          },
+          {
+            name:'Java协会',
+            num:1603011
+          },
+          {
+            name:'Java协会',
+            num:1603011
+          },
+          {
+            name:'Java协会',
+            num:1603011
+          }
+        ],
         student:[
             {
                 name:'李明',
@@ -137,7 +137,13 @@ export default {
         type: 'success',
         duration: 3500
       });
-    }
+    },
+    changedelete(){
+      this.isDelete = !this.isDelete
+    },
+    ToDelete(){
+      console.log('delete')
+    },
   }
 }
 </script>
@@ -163,7 +169,7 @@ export default {
     width: 100%;
     text-align: center;
     font-size: 25px;
-    font-weight: bolder
+    font-weight: bolder;
   }
   .el-card{
     position: relative;

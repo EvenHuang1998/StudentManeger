@@ -21,65 +21,105 @@
     <div class="picker">
       <template>
         <el-select
-         placeholder="请选择专业"
+         v-model="depart" 
+         @change="chooseDepart"
+         placeholder="请选择系"
          style="width:300px;">
-          <el-option>
+          <el-option
+            v-for="item in options"
+            :key="item.id"
+            :label="item.label"
+            :value="item.label">
           </el-option>
         </el-select>
       </template>
-      <el-button class="first" type="primary" round>编辑</el-button>
-      <el-button type="info" round>删除</el-button>
+      <el-button class="first" type="primary" round @click="changeEdit">{{isEdit?'取消':'编辑'}}</el-button>
+      <el-button type="info" round @click="changedelete">{{isDelete?'取消':'删除'}}</el-button>
     </div>
     <div class="cards">
-      <el-card shadow="hover">
-        <i class="el-icon-error"></i>
-        <i class="el-icon-info"> 计算机科学与技术</i>
-        <div class="info">1603011</div>
+      <el-card v-for="item in classList" :key="item.id" shadow="hover"  v-bind:class="{ active: isEdit }">
+        <i class="el-icon-error" v-show="isDelete" @click="ToDelete"></i>
+        <i class="el-icon-info">{{item.departName}}</i>
+        <div class="info">{{item.classNum}}</div>
       </el-card>
-      <el-card shadow="hover">
-        <i class="el-icon-error"></i>
-        <i class="el-icon-circle-plus"> 计算机科学与技术</i>
-        <div class="info">1603012</div>
-      </el-card>
-      <el-card shadow="hover">
-        <i class="el-icon-error"></i>
-        <i class="el-icon-success"> 计算机科学与技术</i>
-        <div class="info">1603013</div>
-      </el-card>
-      <el-card shadow="hover">
-        <i class="el-icon-error"></i>
-        <i class="el-icon-star-on"> 计算机科学与技术</i>
-        <div class="info">1603014</div>
-      </el-card>
-      <el-card shadow="hover">
-        <i class="el-icon-error"></i>
-        <i class="el-icon-star-on"> 计算机科学与技术</i>
-        <div class="info">1603018</div>
-      </el-card>
-      <el-card shadow="hover">
-        <i class="el-icon-error"></i>
-        <i class="el-icon-star-on"> 计算机科学与技术</i>
-        <div class="info">1603019</div>
-      </el-card>
-      <el-card shadow="hover">
-        <img src="/static/plus.png" style="height:90px;width:90px;"  @click="go"/>
+      <el-card shadow="hover" @click.native="go">
+        <img src="/static/plus.png" style="height:90px;width:90px;" />
       </el-card>
     </div>
   </div>
 </template>
 
 <script>
+import Bus from '@/assets/other'
 export default {
   data() {
     return {
-
+      depart:'',
+      isEdit:false,
+      isDelete:false,
+      options:[
+        {
+            label:'通信工程',
+            id:1
+        },
+        {
+            label:'电子信息工程',
+            id:2
+        },
+        {
+            label:'计算机科学与技术',
+            id:3
+        },
+        {
+            label:'机电工程',
+            id:4
+        },
+        {
+            label:'微电子',
+            id:5
+        }
+      ],
+      classList:[
+        {
+          departName:'计算机科学与技术',
+          classNum:1601011
+        },{
+          departName:'计算机科学与技术',
+          classNum:1601012
+        },{
+          departName:'计算机科学与技术',
+          classNum:1601013
+        },{
+          departName:'计算机科学与技术',
+          classNum:1601014
+        },{
+          departName:'计算机科学与技术',
+          classNum:1601015
+        },{
+          departName:'计算机科学与技术',
+          classNum:1601016
+        }
+      ]
     }
   },
   components:{
   },
   methods:{
     go(){
+      this.$store.commit('change','editPlus')
       this.$router.push('/editPlus')
+    },
+    changeEdit(){
+      this.isEdit = !this.isEdit
+    },
+    changedelete(){
+      this.isDelete = !this.isDelete
+    },
+    ToDelete(){
+      console.log('delete')
+    },
+    chooseDepart(){
+      console.log(this.depart)
     }
   }
 }
@@ -115,6 +155,11 @@ export default {
     margin:20px;
     text-align: center;
   }
+  .active:hover
+  { 
+    background-color:yellow;
+  } 
+ 
   .el-icon-error{
     color: #db1616;
     top: 0;
