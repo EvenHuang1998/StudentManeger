@@ -47,6 +47,7 @@
     },
     methods: {
       onSubmit() {
+        console.log(qs.stringify(this.form))
         var config = {
           // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           method: 'post'
