@@ -127,7 +127,7 @@
 
 ~~~json
 {
-        "dep_name":"计算机"
+        "dep_name":"计算机",
         "maj_name":"计算机",
         "cla_no":"1603022",
         "cla_year":2018,
