@@ -6,7 +6,7 @@
         class="el-menu-vertical-demo"
         background-color="#545c64"
         text-color="#fff"
-        active-text-color="#ffd04b"
+        active-text-color="#ffffff"
         router>
             <el-menu-item index="statistical">
                 <i class="el-icon-view"></i>
@@ -46,21 +46,21 @@
 
 <script>
 import headerTop from "@/components/headerTop";
-import Bus from '@/assets/other'
 export default {
   data(){
       return{
-        index:this.$store.state.pageClicked
+        index:'statistical'
       }
   },
-  watch: {
-    index(newName, oldName) {
-      console.log(newName,oldName)
-    }
-  } ,
   components: {
       headerTop
   },
+  computed: {
+        defaultActive() {
+            console.log('sss')
+            return '/' + this.$route.path.split('/').reverse()[0];
+        }
+    },
   mounted () {
     let arr = window.location.href.toString().split('/')
     this.index = arr[arr.length - 1]

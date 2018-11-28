@@ -1,5 +1,9 @@
 <template>
-  <div class="contents">
+  <div 
+  class="contents"
+  v-loading="loading"
+  element-loading-text="玩命加载中"
+  >
     <div class="information">
       <table>
         <tr>
@@ -27,6 +31,7 @@
     <template>
             <el-table
                 :data="student"
+                @row-click="chooseClass"
                 style="width: 60vw">
                 <el-table-column
                 width='80'
@@ -57,9 +62,12 @@
 </template>
 
 <script>
+import {getClassInfo} from '../../API/API'
+import {messageBox,notification} from '../../API/Toast'
 export default {
   data() {
     return {
+        loading:false,
         student:[
             {
                 name:'李明',
@@ -83,7 +91,38 @@ export default {
     }
   },
   components:{
-  }
+
+  },
+  methods:{
+    toastCallBack(){
+      this.$message.error('请选择您需要查找的班级');
+      this.$router.push('/statistical')
+    },
+    toastError(){
+      console.log(this)
+      this.$message.error('发生了错误，可能是网络异常，请稍后重试')
+      this.$router.push('/statistical')
+    },
+    chooseClass(row){
+      this.$router.push({path: '/stuInfo', query: {num: row.stunum}})
+    }
+  },
+  created:function(){
+    this.loading = true
+    var cur = this.$route.query.selected;
+    if(cur == undefined){
+      //用户没有输入参数
+      let msg = "请先在统计中心选择您想要查询的具体班级"
+      messageBox(this,this.$options.methods.toastCallBack,msg)
+    } else{
+        getClassInfo(this,cur).then((res)=>{
+        this.loading = false
+      },(error)=>{
+        let msg = "发生了错误，可能是网络异常，请稍后重试"
+        messageBox(this,this.$options.methods.toastError,msg)
+      })
+    }
+  },
 }
 </script>
 

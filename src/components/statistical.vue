@@ -1,5 +1,9 @@
 <template>
-  <div class="contents">
+  <div 
+  class="contents" 
+  v-loading="loading"
+  element-loading-text="拼命加载中"
+  >
     <div class="information">
       <table>
         <tr>
@@ -37,8 +41,8 @@
       <el-button type="info" round @click="changedelete">{{isDelete?'取消':'删除'}}</el-button>
     </div>
     <div class="cards">
-      <el-card v-for="item in classList" :key="item.id" shadow="hover"  v-bind:class="{ active: isEdit }">
-        <i class="el-icon-error" v-show="isDelete" @click="ToDelete"></i>
+      <el-card v-for="item in classList" :key="item.id" shadow="hover"  v-bind:class="{ active: isEdit }" @click.native="ToLink(item.classNum)">
+        <i class="el-icon-error" v-show="isDelete" @click.stop="ToDelete"></i>
         <i class="el-icon-info">{{item.departName}}</i>
         <div class="info">{{item.classNum}}</div>
       </el-card>
@@ -50,10 +54,11 @@
 </template>
 
 <script>
-import Bus from '@/assets/other'
+import {getDeparList,getDeparInfo} from '../API/API'
 export default {
   data() {
     return {
+      loading:false,
       depart:'',
       isEdit:false,
       isDelete:false,
@@ -103,6 +108,15 @@ export default {
     }
   },
   components:{
+
+  },
+  mounted:function(){
+      //首屏加载系的列表
+      getDeparList(this).then((res)=>{
+          console.log(res)
+      },(err)=>{
+
+      })
   },
   methods:{
     go(){
@@ -119,7 +133,18 @@ export default {
       console.log('delete')
     },
     chooseDepart(){
-      console.log(this.depart)
+      this.loading = true
+      //选中系后加载该系信息
+      getDeparInfo(this).then((res)=>{
+          console.log(res)
+          this.loading = false
+      },(err)=>{
+          console.log(err)
+      })
+    },
+    ToLink(key){
+      this.$store.commit('change','classesList')
+      this.$router.push({path: '/classesList', query: {selected: key}})
     }
   }
 }

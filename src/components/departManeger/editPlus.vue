@@ -9,7 +9,7 @@
         <el-input v-model="form.name" @change="changes"></el-input>
       </el-form-item>
       <el-form-item label="班号">
-        <el-input v-model="form.nunber"></el-input>
+        <el-input v-model="form.number"></el-input>
       </el-form-item>
       <el-form-item label="宿舍区">
         <el-input v-model="form.room"></el-input>
@@ -33,6 +33,8 @@
 </template>
 <script>
   import qs from 'qs'
+  import ajax from '../../API/utils'
+  import {sendClassInfo} from '../../API/API'
   export default {
     data() {
       return {
@@ -47,18 +49,23 @@
     },
     methods: {
       onSubmit() {
-        console.log(qs.stringify(this.form))
-        var config = {
-          // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          method: 'post'
-        };
-        this.$axios.post('/api',qs.stringify(this.form),config)
-        .then((response) => {
-          console.log(response)
+        console.log(this.form)
+        sendClassInfo(this,this.form).then((response)=>{
+            console.log(response)
+        },(err)=>{
+            console.log(err)
         })
-        .catch((response) => {
-          console.log('response')
-        })
+        // var config = {
+        //   // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        //   method: 'post'
+        // };
+        // this.$axios.post('/api',qs.stringify(this.form),config)
+        // .then((response) => {
+        //   console.log(response)
+        // })
+        // .catch((response) => {
+        //   console.log('response')
+        // })
         // this.$axios.get('/api',{params:this.form},config)
         // .then((response) => {
         //   console.log(response)
