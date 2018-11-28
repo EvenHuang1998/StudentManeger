@@ -62,9 +62,9 @@
 
 ~~~json
 {
-	"maj_no":"1600000",
-   "dep_no":"1602120",
-   "maj_name":"计算机"
+     "maj_no":"1600000",
+     "dep_no":"1602120",
+     "maj_name":"计算机"
 }
 ~~~
 
@@ -107,7 +107,7 @@
 
 ~~~json
 {
-   		"maj_no":"1603000",
+   		   "maj_no":"1603000",
          "cla_no":"1603022",
          "cla_year":2018
 }
@@ -127,12 +127,12 @@
 
 ~~~json
 {
-   		"dep_name":"计算机"
-   		"maj_name":"计算机",
-         "cla_no":"1603022",
-         "cla_year":2018,
-         "cla_peo":20,
-   		"dep_dorm":"丁香",
+        "dep_name":"计算机"
+        "maj_name":"计算机",
+        "cla_no":"1603022",
+        "cla_year":2018,
+        "cla_peo":20,
+   		  "dep_dorm":"丁香",
       	"studentList":{
             "student":[
                {
@@ -243,7 +243,7 @@
             "stu_name":"limign",
             "stu_no":"16040610002",
             "cla_no":"1602011",
-            "stu_age":18，
+            "stu_age":18,
             "clu_no":"1600000"
 }
 ~~~
