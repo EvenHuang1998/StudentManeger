@@ -21,7 +21,7 @@
    "dep_name":"计算机科学与技术",
    "dep_loc":"行政楼111",
    "dep_no":"1603000",
-   "dep_dorm":"丁香"
+   "dep_dorm":"丁香",
    "dep_num":11,
    "majorList":{
       "major":[
